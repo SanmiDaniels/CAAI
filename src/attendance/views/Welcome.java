@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
 
-
 /**
  *
  * @author mofoluwaso
