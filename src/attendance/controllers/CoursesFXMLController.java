@@ -380,12 +380,23 @@ public class CoursesFXMLController implements Initializable {
     @FXML
     public void viewEnrolledStudents(ActionEvent event) {
 
+        Window courseOptionWindow = ((Node) event.getSource()).getScene().getWindow();
+        try {
+
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/views/EnrolledStudentsFXML.fxml"));
+            Parent root = loader.load();
+
         
-        
-        
-        
-        
-        
+
+            courseOptionWindow.hide();
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+        }        
         
         
     }
