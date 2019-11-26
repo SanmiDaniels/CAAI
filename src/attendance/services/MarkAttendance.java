@@ -20,12 +20,13 @@ import static com.googlecode.javacv.cpp.opencv_core.*;
 import static com.googlecode.javacv.cpp.opencv_legacy.*;
 import static com.googlecode.javacv.cpp.opencv_imgproc.*;
 import static com.googlecode.javacv.cpp.opencv_objdetect.*;
+import javafx.concurrent.Task;
 
 /**
  *
  * @author test
  */
-public class MarkAttendance {
+public class MarkAttendance extends Task<String> {
 
     //==================================================
     float MaxConfidence = 0.800f;
@@ -98,6 +99,16 @@ public class MarkAttendance {
         }
     }
 
+    
+    @Override
+   protected String call() throws Exception {
+    String matNo;
+    
+    matNo = recognizeFromCam();   
+     return matNo;  
+   }
+    
+    
     public String recognizeFromCam() {
        String matricNumber = new String();
         try {

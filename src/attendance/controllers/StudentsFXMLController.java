@@ -15,6 +15,8 @@ import attendance.services.MarkAttendance;
 import attendance.services.StudentStatistics;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -267,8 +269,34 @@ public class StudentsFXMLController implements Initializable {
     @FXML
     public void markAttendance(ActionEvent event) {
 
-        String matricNumber = new MarkAttendance().recognizeFromCam();
+    System.out.println("We got here1");
+        
+       MarkAttendance obj =  new MarkAttendance();
+        
+        obj.setOnRunning((succeesesEvent) -> {
+                
+            
+               });
+
+               obj.setOnSucceeded((succeededEvent) -> {
+               markTruly(obj.getValue().toString());
+                  System.out.println("We got here1"); 
+               });
+
+               ExecutorService executorService = Executors.newFixedThreadPool(1);
+               executorService.execute(obj);
+               executorService.shutdown();
+        
+
+    }
+    
+    
+    public void markTruly(String matr){
+        
+        String matricNumber = matr;
         if (matricNumber.isEmpty()) {
+            
+            System.out.println("We got here1");
             message.setText("Student has not been enrolled for the course");
         } else {
 
@@ -296,8 +324,12 @@ public class StudentsFXMLController implements Initializable {
             }
 
         }
-
+        
+        
+        
     }
+    
+  
 
     public void updateStudentAttendanceStatistics(String matric) {
         StudentStatistics statistics = new StudentStatistics();
